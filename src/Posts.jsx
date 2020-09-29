@@ -1,37 +1,51 @@
 import React from "react";
 import Post from "./Post";
-
 const Posts = ({
-  postTasks,
-  like,
-  retweet,
-  comment,
+  tasks,
+  isComment,
   commentValue,
+  commentEditValue,
   onClickComment,
   onCommentChange,
   onCommentSubmit,
   onRetweetClick,
-  onLikeClick
+  onLikeClick,
+  onClickDelete,
+  onClickEdit,
+  onEditChange,
+  editValue,
+  onEditSubmit,
+  onCommentDelete,
+  onClickCommentEdit,
+  onCommentEditChange,
+  onCommentEditSubmit
 }) => {
   return (
     <>
-      {postTasks.map((postTask) => (
+      {tasks.map((task) => (
         <Post
-          key={postTask.id}
-          postTask={postTask}
-          like={like}
-          retweet={retweet}
-          comment={comment}
+          key={task.id}
+          task={task}
+          isComment={isComment}
           commentValue={commentValue}
+          editValue={editValue}
+          commentEditValue={commentEditValue}
           onClickComment={onClickComment}
           onCommentChange={onCommentChange}
           onCommentSubmit={onCommentSubmit}
           onRetweetClick={onRetweetClick}
           onLikeClick={onLikeClick}
+          onClickDelete={onClickDelete}
+          onClickEdit={onClickEdit}
+          onEditChange={onEditChange}
+          onEditSubmit={onEditSubmit}
+          onCommentDelete={onCommentDelete}
+          onClickCommentEdit={onClickCommentEdit}
+          onCommentEditChange={onCommentEditChange}
+          onCommentEditSubmit={onCommentEditSubmit}
         />
       ))}
     </>
   );
 };
-
 export default Posts;

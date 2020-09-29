@@ -1,31 +1,48 @@
 import React from "react";
-import Button from "./Button";
-
 const Post = ({
-  postTask,
-  like,
-  retweet,
-  comment,
+  task,
   commentValue,
+  editValue,
   onClickComment,
   onCommentChange,
   onCommentSubmit,
   onRetweetClick,
-  onLikeClick
+  onLikeClick,
+  onClickDelete,
+  onClickEdit,
+  onEditChange,
+  onEditSubmit,
+  onCommentDelete,
+  onClickCommentEdit,
+  onCommentEditChange,
+  commentEditValue,
+  onCommentEditSubmit
 }) => {
-  const isComment = comment;
+  const isComment = !!task.isComment;
+  const isEdit = !!task.isEdit;
   return (
     <>
       <div>
-        <div>{postTask.postValue}</div>
-        <Button
-          className="Comment"
-          onClick={onClickComment}
-          buttonName={"💬"}
-        />
+        <div>{task.value}</div>
+        <button onClick={() => onClickDelete(task)}>delete</button>
+        <button onClick={() => onClickEdit(task.id)}>edit</button>
+        {isEdit && (
+          <>
+            <form onSubmit={(e) => onEditSubmit(e, task.id)}>
+              <input
+                type="text"
+                value={editValue}
+                onChange={onEditChange}
+              ></input>
+              <input type="submit" value={"change"}></input>
+            </form>
+          </>
+        )}
+        　　　　
+        <button onClick={() => onClickComment(task.id)}>{"💬"}</button>
         {isComment && (
           <>
-            <form onSubmit={(e) => onCommentSubmit(e)}>
+            <form onSubmit={(e) => onCommentSubmit(e, task.id)}>
               <input
                 type="text"
                 value={commentValue}
@@ -35,21 +52,39 @@ const Post = ({
             </form>
           </>
         )}
-        <Button
-          className="Retweet"
-          retweet={retweet}
-          onClick={onRetweetClick}
-          buttonName={"♻"}
-        />
-        <Button
-          className="Likes"
-          like={like}
-          onClick={onLikeClick}
-          buttonName={"❤️"}
-        />
+        <>
+          <button onClick={() => onRetweetClick(task.id)}>{"♻"}</button>
+          <> {task.retweet} </>
+        </>
+        <>
+          <button onClick={() => onLikeClick(task.id)}>{"❤️"}</button>
+          <> {task.like} </>
+        </>
+        {task.comments.map((comment) => (
+          <div key={comment.id}>
+            {comment.commentValue}
+            <button onClick={() => onCommentDelete(comment, task)}>
+              delete
+            </button>
+            <button onClick={() => onClickCommentEdit(comment, task)}>
+              edit
+            </button>
+            {!!comment.isCommentEdit && (
+              <>
+                <form onSubmit={(e) => onCommentEditSubmit(e, comment, task)}>
+                  <input
+                    type="text"
+                    value={commentEditValue}
+                    onChange={onCommentEditChange}
+                  ></input>
+                  <input type="submit" value={"reply"}></input>
+                </form>
+              </>
+            )}
+          </div>
+        ))}
       </div>
     </>
   );
 };
-
 export default Post;

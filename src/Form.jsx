@@ -1,5 +1,4 @@
 import React from "react";
-
 const Form = ({ value, onChange, onSubmit, submitButtonName }) => {
   return (
     <>
@@ -10,5 +9,4 @@ const Form = ({ value, onChange, onSubmit, submitButtonName }) => {
     </>
   );
 };
-
 export default Form;
