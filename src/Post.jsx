@@ -59,7 +59,9 @@ const Post = ({
         <>
           <button onClick={() => onLikeClick(task.id)}>{"❤️"}</button>
           <> {task.like} </>
+          <>{task.createdAt}</>
         </>
+
         {task.comments.map((comment) => (
           <div key={comment.id}>
             {comment.commentValue}

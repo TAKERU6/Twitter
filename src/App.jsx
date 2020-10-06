@@ -165,6 +165,7 @@ class App extends Component {
     e.preventDefault();
     const { tasks, value } = this.state;
     const id = tasks.length + 1;
+    const createdAt = new Date().toLocaleString();
     this.setState({
       tasks: [
         {
@@ -174,7 +175,8 @@ class App extends Component {
           retweet: 0,
           isComment: false,
           isEdit: false,
-          comments: []
+          comments: [],
+          createdAt
         },
         ...tasks
       ],
